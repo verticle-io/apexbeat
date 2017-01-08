@@ -7,7 +7,7 @@ import (
   "net/http"
 	"github.com/gorilla/mux"
 	"time"
-
+	"io/ioutil"
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/logp"
@@ -116,8 +116,12 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	logp.Info("Event sent")
 
 
+
 	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 
+	body,err := ioutil.ReadAll(r.Body)
+
+	fmt.Fprintf(w, "Body:, %q", body,err)
 }
 
 
