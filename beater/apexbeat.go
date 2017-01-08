@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"time"
 	"io/ioutil"
+	"encoding/json"
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/logp"
@@ -107,21 +108,34 @@ func Publish(bt *Apexbeat){
 func Index(w http.ResponseWriter, r *http.Request) {
 	// messages <- "channel message"
 
-	event := common.MapStr{
-		"@timestamp": common.Time(time.Now()),
-		"type":       "test2",
-		"message":    "123123123",
-	}
-	abt.client.PublishEvent(event)
-	logp.Info("Event sent")
+
 
 
 
 	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 
 	body,err := ioutil.ReadAll(r.Body)
+  fmt.Fprintf(w, "Body:, %q", body,err)
+	type ApexMetricMessage struct {
+	    meta map[string]string
+			metrics map[string]string
+	}
 
-	fmt.Fprintf(w, "Body:, %q", body,err)
+	var f interface{}
+	//metricsMessage := &ApexMetricMessage{}
+  json.Unmarshal([]byte(body), &f)
+	fmt.Printf("%+v\n", f)
+	//logp.Info(fmt.Printf("%+v\n", stats))
+	event := common.MapStr{
+		"@timestamp": common.Time(time.Now()),
+		"type":       "test2",
+		"meta":    f.(map[string]interface{})["meta"],
+		"metrics":	 f.(map[string]interface{})["metrics"],
+	}
+	abt.client.PublishEvent(event)
+	logp.Info("Event sent")
+
+
 }
 
 
