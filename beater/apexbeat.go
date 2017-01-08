@@ -17,7 +17,7 @@ import (
 )
 
 var abt *Apexbeat
-var messages chan string
+//var messages chan string
 
 type Apexbeat struct {
 	done   chan struct{}
@@ -48,10 +48,10 @@ func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 func (bt *Apexbeat) Run(b *beat.Beat) error {
 	logp.Info("apexbeat is running! Hit CTRL-C to stop it.")
 
-	messages = getChannel()
+	//messages = getChannel()
 	bt.client = b.Publisher.Connect()
 
-	go Publish(bt)
+	//go Publish(bt)
 
 	go func(){
 		router := mux.NewRouter().StrictSlash(true)
@@ -84,6 +84,8 @@ func (bt *Apexbeat) Stop() {
 	close(bt.done)
 }
 
+/*
+
 func Publish(bt *Apexbeat){
 	logp.Info("Publish() called")
 
@@ -98,6 +100,7 @@ func Publish(bt *Apexbeat){
 
 
 }
+*/
 
 
 
