@@ -100,10 +100,3 @@ func CollectorMetrics(w http.ResponseWriter, r *http.Request) {
 	logp.Info("Event sent")
 
 }
-
-
-// function returns a channel
-func getChannel() chan string {
-	b := make(chan string)
-	return b
-}
