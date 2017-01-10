@@ -2,7 +2,6 @@ package beater
 
 import (
 	"fmt"
-	"html"
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
@@ -45,14 +44,14 @@ func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 
 // Runs the beater
 func (bt *Apexbeat) Run(b *beat.Beat) error {
-	logp.Info("apexbeat is running! Hit CTRL-C to stop it.")
+	logp.Info("apexbeat is running (port " + bt.config.Port + ")! Hit CTRL-C to stop it.")
 
 	bt.client = b.Publisher.Connect()
 
 	go func() {
 		router := mux.NewRouter().StrictSlash(true)
 		router.HandleFunc("/collector/metrics", CollectorMetrics)
-		log.Fatal(http.ListenAndServe(":8088", router))
+		log.Fatal(http.ListenAndServe(":" + bt.config.Port, router))
 	}()
 
 	// loop
@@ -81,6 +80,9 @@ func CollectorMetrics(w http.ResponseWriter, r *http.Request) {
 	}
 
 	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		panic(err)
+	}
 
 	var f interface{}
 	json.Unmarshal([]byte(body), &f)

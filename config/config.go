@@ -7,8 +7,10 @@ import "time"
 
 type Config struct {
 	Period time.Duration `config:"period"`
+	Port string `config:"port"`
 }
 
 var DefaultConfig = Config{
 	Period: 1 * time.Second,
+	Port: "8088",
 }
