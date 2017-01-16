@@ -2,4 +2,4 @@
 
 Welcome to the Apexbeat documentation.
 
-
+Please head over to the online documentation at http://toolkits.verticle.io/docs/index.html#elasticsearch-apexbeats[http://toolkits.verticle.io]

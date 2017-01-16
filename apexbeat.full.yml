@@ -6,6 +6,9 @@ apexbeat:
   # Defines how often an event is sent to the output
   period: 1s
 
+  # Defines the http port serviced
+  port: 8089
+
 #================================ General ======================================
 
 # The name of the shipper that publishes the network data. It can be used to group
@@ -593,4 +596,3 @@ logging.files:
 
   # Number of rotated log files to keep. Oldest files will be deleted first.
   #keepfiles: 7
-
