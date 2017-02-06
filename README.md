@@ -2,10 +2,24 @@
 
 Welcome to Apexbeat.
 
+APEX extracts contextual data and metrics directly from your Java application.
+
+It helps getting better visibility and understanding of what is happening in the software products' application layer during runtime.
+Designed to accelerate application analytics, debugging and monitoring.
+
+apexbeat makes it easy to push your extracted data to an ElasticSearch node.
+
+![Apex Toolkit](https://verticle-io.github.io/apexbeat/vio-apex-isometric5.svg)
+
+Visit [toolkits.verticle.io](http://toolkits.verticle.io) for more details on APEX.
+
+## Getting Started with Apexbeat
+
+This guide will explain how to build apexbeat on your system.
+
 Ensure that this folder is at the following location:
 `${GOPATH}/github.com/verticle-io`
 
-## Getting Started with Apexbeat
 
 ### Requirements
 
